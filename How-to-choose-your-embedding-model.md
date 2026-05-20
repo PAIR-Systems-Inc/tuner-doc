@@ -34,7 +34,7 @@ When you finish you will have a metrics table — **NDCG@10**, **Recall@10**,
 3. Click **Create Project**. You land on the project overview at
    `/project/{id}`.
 
-![Create New Project dialog](assets/how-to-choose-your-embedding-model/create-new-project.png)
+<img src="assets/how-to-choose-your-embedding-model/create-new-project.png" alt="Create New Project dialog" width="600">
 
 ## 3. Upload the dataset
 
@@ -76,7 +76,7 @@ Each line is one document chunk:
 {"id": "doc-001", "text": "This is the first document chunk"}
 ```
 
-![Upload Corpus File dialog](assets/how-to-choose-your-embedding-model/upload-corpus-file.png)
+<img src="assets/how-to-choose-your-embedding-model/upload-corpus-file.png" alt="Upload Corpus File dialog" width="600">
 
 ### 3.2 Upload the queries
 
@@ -114,7 +114,7 @@ Go to **IR Datasets** (`/project/{id}/dataset`) and click **Add Dataset**.
 Select the corpus, query, and relevance set files you just uploaded, set
 **Dataset Name** to `qnli`, and save. The new dataset appears in the table.
 
-![Add Dataset](assets/how-to-choose-your-embedding-model/add-dataset.png)
+<img src="assets/how-to-choose-your-embedding-model/add-dataset.png" alt="Add Dataset" width="600">
 
 ## 4. Start a benchmark
 
@@ -140,7 +140,7 @@ List** (`/project/{id}/models`) and click **Add Model**. For each candidate:
 
 Repeat until every candidate appears in the model list.
 
-![Add Model dialog](assets/how-to-choose-your-embedding-model/add-model.png)
+<img src="assets/how-to-choose-your-embedding-model/add-model.png" alt="Add Model dialog" width="600">
 
 ### 4.2 Run a benchmark for each model
 
@@ -162,7 +162,7 @@ Click **Run Benchmark**. The run starts as a background job — track it under
 **Jobs** (`/project/{id}/jobs`). Repeat for the second model so both are
 scored on the same `qnli` dataset.
 
-![Run Benchmark](assets/how-to-choose-your-embedding-model/run-benchmark.png)
+<img src="assets/how-to-choose-your-embedding-model/run-benchmark.png" alt="Run Benchmark" width="600">
 
 ## 5. Compare results
 
@@ -189,4 +189,4 @@ use case — **NDCG@10** and **Recall@10** are good general indicators of
 retrieval quality. If two models are close, factor in model size and latency.
 That model is your embedding model.
 
-![Compare Models](assets/how-to-choose-your-embedding-model/compare-models.png)
+<img src="assets/how-to-choose-your-embedding-model/compare-models.png" alt="Compare Models" width="600">
