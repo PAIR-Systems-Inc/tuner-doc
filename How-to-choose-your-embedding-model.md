@@ -153,8 +153,14 @@ benchmark per model — for this demonstration, one for
 | **Model** | Yes | The embedding model to score — pick one of the two |
 | **Device** | No | **Auto**, **CPU**, or **CUDA (GPU)** — defaults to **Auto** |
 | **Batch Size** | No | Defaults to `32` |
-| **Top-K** | No | Retrieval depth; leave blank for the default |
+| **Top-K** | No | How many results to retrieve per query; defaults to `10` |
 | **Host model on vLLM server** | No | Optional, for embedding models |
+
+> **Note — Top-K bounds the metrics:** Top-K sets how many results each query
+> retrieves, and it defaults to `10`. Metrics are computed only over the
+> retrieved results, so at the default any metric with a deeper cutoff matches
+> its `@10` value — `Recall@100` equals `Recall@10`, for instance. To measure
+> at a deeper cutoff, raise Top-K to at least that value.
 
 Click **Run Benchmark**. The run starts as a background job — track it under
 **Jobs** (`/project/{id}/jobs`). Repeat for the second model so both are
