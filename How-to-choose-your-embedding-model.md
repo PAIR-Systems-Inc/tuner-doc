@@ -49,9 +49,8 @@ under one name.
 > - **Collect real labels** — hire annotators, or gather feedback from your
 >   existing search system (clicks, ratings, manual relevance judgements).
 > - **Synthesize one from your corpus** — generate queries and relevance
->   labels automatically. A dedicated recipe,
->   [How to synthesize a dataset](How-to-synthesize-a-dataset), is coming.
->   <!-- TODO: create the How-to-synthesize-a-dataset recipe page -->
+>   labels automatically. See the recipe
+>   [How to synthesize a dataset](How-to-synthesize-a-dataset).
 
 For this recipe we use **QNLI** (Question-answering Natural Language
 Inference), which converts cleanly into a retrieval task: each question has a
