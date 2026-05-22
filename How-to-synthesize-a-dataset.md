@@ -146,5 +146,6 @@ Files**.
 
 With a corpus, a generated query file, and a generated relevance set, you have
 a complete synthetic dataset. Assemble the three on the **IR Datasets** page
-(**Add Dataset**), then use it to benchmark or fine-tune — see
-[How to choose your embedding model](How-to-choose-your-embedding-model).
+(**Add Dataset**), then use it to
+[fine-tune an embedding model](How-to-fine-tune-an-embedding-model) or
+[benchmark and choose one](How-to-choose-your-embedding-model).
