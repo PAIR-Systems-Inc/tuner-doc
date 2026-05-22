@@ -61,7 +61,6 @@ Download a ready-made QNLI dataset —
 [qnli.zip](assets/how-to-choose-your-embedding-model/qnli.zip) — which unpacks
 into the three `.jsonl` files (one JSON object per line). Then upload each in
 the steps below.
-<!-- TODO: add qnli.zip (corpus + queries + relevance set) to assets/how-to-choose-your-embedding-model/ -->
 
 ### 3.1 Upload the corpus
 
@@ -111,7 +110,7 @@ Scores typically range from `0.0` (not relevant) to `1.0` (relevant).
 
 Go to **IR Datasets** (`/project/{id}/dataset`) and click **Add Dataset**.
 Select the corpus, query, and relevance set files you just uploaded, set
-**Dataset Name** to `qnli`, and save. The new dataset appears in the table.
+**Dataset Name** to `qnli-validation`, and save. The new dataset appears in the table.
 
 <img src="assets/how-to-choose-your-embedding-model/add-dataset.png" alt="Add Dataset" width="600">
 
@@ -119,7 +118,7 @@ Select the corpus, query, and relevance set files you just uploaded, set
 
 A benchmark run scores **one model** against **one dataset**. To compare
 models, make sure each candidate is in the project, then run a benchmark for
-each — all against the `qnli` dataset.
+each — all against the `qnli-validation` dataset.
 
 ### 4.1 Add the models you want to compare
 
@@ -150,7 +149,7 @@ benchmark per model — for this demonstration, one for
 
 | Field | Required | Notes |
 |---|---|---|
-| **Dataset** | Yes | Select `qnli` |
+| **Dataset** | Yes | Select `qnli-validation` |
 | **Model** | Yes | The embedding model to score — pick one of the two |
 | **Device** | No | **Auto**, **CPU**, or **CUDA (GPU)** — defaults to **Auto** |
 | **Batch Size** | No | Defaults to `32` |
@@ -159,7 +158,7 @@ benchmark per model — for this demonstration, one for
 
 Click **Run Benchmark**. The run starts as a background job — track it under
 **Jobs** (`/project/{id}/jobs`). Repeat for the second model so both are
-scored on the same `qnli` dataset.
+scored on the same `qnli-validation` dataset.
 
 <img src="assets/how-to-choose-your-embedding-model/run-benchmark.png" alt="Run Benchmark" width="600">
 

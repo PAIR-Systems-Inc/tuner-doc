@@ -137,10 +137,14 @@ Pick a GPU under **Accelerator (GPU)** and click **Start Fine-tuning**.
 
 ### Step 5 — Run the benchmark
 
-When `Qwen3-embedding-qnli` appears in **Models → Model List**, benchmark it
-against the original `Qwen/Qwen3-Embedding-0.6B` on the `qnli-synthetic`
-dataset and compare the two — see
-[How to choose your embedding model](How-to-choose-your-embedding-model). The
-fine-tuned model should score higher on NDCG@10 and Recall@10 for QNLI.
+Evaluate the fine-tuned model on held-out data, not the dataset it trained on.
+When `Qwen3-embedding-qnli` appears in **Models → Model List**, benchmark it on
+the `qnli-validation` dataset — a QNLI validation set kept separate from
+training.
+
+Compare its scores against the baseline results demonstrated in
+[How to choose your embedding model](How-to-choose-your-embedding-model), which
+benchmarks off-the-shelf models on the same QNLI validation set. The fine-tuned
+model should score higher on NDCG@10 and Recall@10.
 
 <img src="assets/how-to-fine-tune-an-embedding-model/example-step-5-benchmark.png" alt="Benchmark Results" width="600">
