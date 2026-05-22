@@ -66,3 +66,81 @@ the form.
 When it finishes, the new model appears under **Models → Model List**. From
 there, benchmark it against other models to confirm it improved — see
 [How to choose your embedding model](How-to-choose-your-embedding-model).
+
+## 4. Example: fine-tune an embedding model for QNLI
+
+This worked example takes QNLI from raw documents all the way to a fine-tuned
+model. Each step links to the recipe that covers it in full.
+
+### Step 1 — Upload the training corpus
+
+Create a project and upload your QNLI corpus on **Files → Corpus Files**. The
+corpus is a JSONL file of chunks — see
+[How to choose your embedding model](How-to-choose-your-embedding-model) for the
+upload steps and schema.
+
+A ready-made corpus is available —
+[qnli_corpus_train.zip](assets/how-to-fine-tune-an-embedding-model/qnli_corpus_train.zip).
+Unpack it and upload the corpus `.jsonl` file.
+
+<img src="assets/how-to-fine-tune-an-embedding-model/example-step-1-upload-corpus.png" alt="Upload the QNLI corpus" width="600">
+
+### Step 2 — Generate synthetic queries
+
+QNLI ships with its own training queries, but here we generate synthetic ones
+to demonstrate Tuner's query generation. On **Generate → Generate Queries**,
+select the QNLI corpus and run the job — see
+[How to synthesize a dataset](How-to-synthesize-a-dataset). The result is a
+query file under **Files → Query Files**.
+
+<img src="assets/how-to-fine-tune-an-embedding-model/example-step-2-generate-queries.png" alt="Generate synthetic queries" width="600">
+
+### Step 3 — Assemble the training dataset
+
+On the **IR Datasets** page, click **Add Dataset**, combine the QNLI corpus
+with the generated query file, and name it `qnli-synthetic`. A basic fine-tune needs only
+a corpus and queries — no relevance set.
+
+<img src="assets/how-to-fine-tune-an-embedding-model/example-step-3-assemble-dataset.png" alt="Assemble the training dataset" width="600">
+
+### Step 4 — Start the fine-tuning
+
+Go to **Models → Fine-tune** and fill in the form:
+
+| Field | Value |
+|---|---|
+| **Dataset** | `qnli-synthetic` |
+| **Base Model** | `Qwen/Qwen3-Embedding-0.6B` |
+| **Model Class** | **Embedding** |
+| **Output Model Name** | `Qwen3-embedding-qnli` |
+| **Epochs** | `3` (default) |
+| **Batch Size (Effective Samples)** | `128` |
+| **Learning Rate** | `0.00002` (default) |
+| **Max Sequence Length** | **Auto** — QNLI sentences are short |
+| **Optimizer** | Paged AdamW 8-bit — under **Advanced Options** |
+| **BF16** | Checked — under **Advanced Options** |
+
+> **Tip — batch size, optimizer, and mixed precision:** These three settings
+> work together to train a larger model efficiently.
+>
+> - **Batch size** — embedding models learn from in-batch negatives, so a
+>   bigger batch (here `128`) gives more negatives per step and usually better
+>   quality, at the cost of more GPU memory.
+> - **Optimizer** — **Paged AdamW 8-bit** keeps optimizer state in 8-bit and
+>   pages it to host memory, freeing GPU memory so the large batch fits.
+> - **Mixed precision** — **BF16** roughly halves memory use and speeds up
+>   training, with a wider numeric range than FP16. Use it on modern GPUs.
+
+Pick a GPU under **Accelerator (GPU)** and click **Start Fine-tuning**.
+
+<img src="assets/how-to-fine-tune-an-embedding-model/example-step-4-fine-tune.png" alt="Start the fine-tuning" width="600">
+
+### Step 5 — Run the benchmark
+
+When `Qwen3-embedding-qnli` appears in **Models → Model List**, benchmark it
+against the original `Qwen/Qwen3-Embedding-0.6B` on the `qnli-synthetic`
+dataset and compare the two — see
+[How to choose your embedding model](How-to-choose-your-embedding-model). The
+fine-tuned model should score higher on NDCG@10 and Recall@10 for QNLI.
+
+<img src="assets/how-to-fine-tune-an-embedding-model/example-step-5-benchmark.png" alt="Benchmark Results" width="600">
